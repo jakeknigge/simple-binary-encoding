@@ -95,6 +95,10 @@ public class PrimitiveValue
     public static final double MAX_VALUE_DOUBLE = Double.MAX_VALUE;
     public static final double NULL_VALUE_DOUBLE = Double.NaN;
 
+    public static final long MIN_VALUE_STRING = 0x20;
+    public static final long MAX_VALUE_STRING = 0x7E;
+    public static final long NULL_VALUE_STRING = 0;
+
     private final Representation representation;
     private final long longValue;
     private final double doubleValue;
@@ -232,6 +236,13 @@ public class PrimitiveValue
             case DOUBLE:
                 return new PrimitiveValue(Double.parseDouble(value), 8);
 
+            case STRING:
+                if (value.length() > 1)
+                {
+                    throw new IllegalArgumentException("Constant string value malformed: " + value);
+                }
+                return new PrimitiveValue(value.getBytes(US_ASCII)[0], 1);
+
             default:
                 throw new IllegalArgumentException("Unknown PrimitiveType: " + primitiveType);
         }
@@ -249,8 +260,16 @@ public class PrimitiveValue
     public static PrimitiveValue parse(
         final String value, final PrimitiveType primitiveType, final String characterEncoding)
     {
-        if (PrimitiveType.CHAR != primitiveType)
+//        if (PrimitiveType.CHAR != primitiveType)
+//        {
+//            throw new IllegalArgumentException("primitiveType must be char: " + primitiveType);
+//        }
+
+        if (PrimitiveType.CHAR != primitiveType && PrimitiveType.STRING != primitiveType)
         {
+            System.out.println("input value: " + value);
+            System.out.println("input primitiveType: " + primitiveType);
+            System.out.println("input characterEncoding: " + characterEncoding);
             throw new IllegalArgumentException("primitiveType must be char: " + primitiveType);
         }
 
@@ -353,6 +372,11 @@ public class PrimitiveValue
             return byteArrayValue;
         }
         else if (representation == Representation.LONG && size == 1 && type == PrimitiveType.CHAR)
+        {
+            byteArrayValueForLong[0] = (byte)longValue;
+            return byteArrayValueForLong;
+        }
+        else if (representation == Representation.LONG && size == 1 && type == PrimitiveType.STRING)
         {
             byteArrayValueForLong[0] = (byte)longValue;
             return byteArrayValueForLong;

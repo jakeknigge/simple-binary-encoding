@@ -71,6 +71,7 @@ public class EnumType extends Type
         switch (encodingTypeStr)
         {
             case "char":
+            case "string":
             case "uint8":
             case "int8":
             case "int16":
@@ -145,7 +146,7 @@ public class EnumType extends Type
                 handleWarning(node, "validValue already exists for name: " + v.name());
             }
 
-            if (PrimitiveType.CHAR != encodingType)
+            if (PrimitiveType.CHAR != encodingType || PrimitiveType.STRING != encodingType)
             {
                 final long value = v.primitiveValue().longValue();
                 final long minValue = null != encodedDataType && null != encodedDataType.minValue() ?

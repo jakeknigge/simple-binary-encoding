@@ -109,6 +109,9 @@ public class Types
             case UINT64:
                 return buffer.getLong(index, encoding.byteOrder());
 
+            case STRING:
+                return buffer.getByte(index);
+
             default:
                 throw new IllegalArgumentException("Unsupported type for long: " + encoding.primitiveType());
         }
@@ -169,6 +172,10 @@ public class Types
 
             case DOUBLE:
                 sb.append(buffer.getDouble(index, encoding.byteOrder()));
+                break;
+
+            case STRING:
+                sb.append('\'').append((char)buffer.getByte(index)).append('\'');
                 break;
         }
     }
@@ -265,6 +272,10 @@ public class Types
                 }
                 break;
             }
+
+            case STRING:
+                sb.append('\'').append((char)buffer.getByte(index)).append('\'');
+                break;
         }
     }
 
@@ -337,6 +348,10 @@ public class Types
                 }
                 break;
             }
+
+            case STRING:
+                sb.append('\'').append((char)value.longValue()).append('\'');
+                break;
         }
     }
 }

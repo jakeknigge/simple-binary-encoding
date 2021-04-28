@@ -192,6 +192,7 @@ public class XmlSchemaParser
         typeByNameMap.put("uint64", new EncodedDataType("uint64", REQUIRED, null, null, UINT64, 1, false));
         typeByNameMap.put("float", new EncodedDataType("float", REQUIRED, null, null, FLOAT, 1, false));
         typeByNameMap.put("double", new EncodedDataType("double", REQUIRED, null, null, DOUBLE, 1, false));
+        typeByNameMap.put("string", new EncodedDataType("string", REQUIRED, null, null, STRING, 1, false));
 
         forEach((NodeList)xPath.compile(TYPE_XPATH_EXPR).evaluate(document, XPathConstants.NODESET),
             (node) -> addTypeWithNameCheck(typeByNameMap, new EncodedDataType(node), node));

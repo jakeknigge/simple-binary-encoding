@@ -98,6 +98,7 @@ public class JavaUtil
         TYPE_NAME_BY_PRIMITIVE_TYPE_MAP.put(PrimitiveType.UINT64, "long");
         TYPE_NAME_BY_PRIMITIVE_TYPE_MAP.put(PrimitiveType.FLOAT, "float");
         TYPE_NAME_BY_PRIMITIVE_TYPE_MAP.put(PrimitiveType.DOUBLE, "double");
+        TYPE_NAME_BY_PRIMITIVE_TYPE_MAP.put(PrimitiveType.STRING, "string");
     }
 
     /**
@@ -263,6 +264,8 @@ public class JavaUtil
             case DOUBLE:
                 literal = value.endsWith("NaN") ? "Double.NaN" : value + "d";
                 break;
+
+            case STRING:
         }
 
         return literal;

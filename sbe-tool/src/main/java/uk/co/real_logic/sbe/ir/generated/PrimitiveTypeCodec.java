@@ -31,6 +31,8 @@ public enum PrimitiveTypeCodec
 
     DOUBLE((short)11),
 
+    STRING((short)12),
+
     /**
      * To be used to represent not present or null.
      */
@@ -75,6 +77,7 @@ public enum PrimitiveTypeCodec
             case 9: return UINT64;
             case 10: return FLOAT;
             case 11: return DOUBLE;
+            case 12: return STRING;
             case 255: return NULL_VAL;
         }
 

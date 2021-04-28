@@ -92,7 +92,7 @@ public class EncodedDataType extends Type
             }
         }
 
-        if (PrimitiveType.CHAR == primitiveType)
+        if (PrimitiveType.CHAR == primitiveType || PrimitiveType.STRING == primitiveType)
         {
             characterEncoding = getAttributeValue(node, "characterEncoding", "US-ASCII").trim().toUpperCase();
         }
@@ -114,7 +114,7 @@ public class EncodedDataType extends Type
                 else
                 {
                     final String nodeValue = node.getFirstChild().getNodeValue();
-                    if (PrimitiveType.CHAR == primitiveType)
+                    if (PrimitiveType.CHAR == primitiveType || PrimitiveType.STRING == primitiveType)
                     {
                         constValue = processConstantChar(node, lengthAttr, nodeValue);
                     }

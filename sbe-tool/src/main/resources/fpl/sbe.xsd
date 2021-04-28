@@ -169,6 +169,7 @@
                             <xs:enumeration value="uint64"/>
                             <xs:enumeration value="float"/>
                             <xs:enumeration value="double"/>
+                            <xs:enumeration value="string"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>

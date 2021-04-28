@@ -1999,7 +1999,7 @@ public class JavaGenerator implements CodeGenerator
             typeSize,
             generateGet(encoding.primitiveType(), "pos", byteOrderStr));
 
-        if (encoding.primitiveType() == PrimitiveType.CHAR)
+        if (encoding.primitiveType() == PrimitiveType.CHAR || encoding.primitiveType() == PrimitiveType.STRING)
         {
             generateCharacterEncodingMethod(sb, propertyName, encoding.characterEncoding(), indent);
 
@@ -2195,7 +2195,7 @@ public class JavaGenerator implements CodeGenerator
             sb.append(indent).append("    }\n");
         }
 
-        if (primitiveType == PrimitiveType.CHAR)
+        if (primitiveType == PrimitiveType.CHAR || primitiveType == PrimitiveType.STRING)
         {
             generateCharArrayEncodeMethods(
                 containingClassName, propertyName, indent, encoding, offset, arrayLength, sb);
@@ -2394,7 +2394,7 @@ public class JavaGenerator implements CodeGenerator
     {
         final String formattedPropertyName = formatPropertyName(propertyName);
         final Encoding encoding = token.encoding();
-        if (encoding.primitiveType() != PrimitiveType.CHAR)
+        if (encoding.primitiveType() != PrimitiveType.CHAR && encoding.primitiveType() != PrimitiveType.STRING)
         {
             new Formatter(sb).format("\n" +
                 indent + "    public %s %s()\n" +
@@ -3069,6 +3069,7 @@ public class JavaGenerator implements CodeGenerator
         switch (type)
         {
             case CHAR:
+            case STRING:
             case INT8:
                 return "buffer.getByte(" + index + ")";
 
@@ -3107,6 +3108,7 @@ public class JavaGenerator implements CodeGenerator
         switch (type)
         {
             case CHAR:
+            case STRING:
             case INT8:
                 return "buffer.putByte(" + index + ", " + value + ")";
 
@@ -3559,7 +3561,8 @@ public class JavaGenerator implements CodeGenerator
             case ENCODING:
                 if (typeToken.arrayLength() > 1)
                 {
-                    if (typeToken.encoding().primitiveType() == PrimitiveType.CHAR)
+                    if (typeToken.encoding().primitiveType() == PrimitiveType.CHAR ||
+                        typeToken.encoding().primitiveType() == PrimitiveType.STRING)
                     {
                         append(sb, indent,
                             "for (int i = 0; i < " + fieldName + "Length() && " + fieldName + "(i) > 0; i++)");

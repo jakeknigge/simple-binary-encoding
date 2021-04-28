@@ -216,6 +216,9 @@ class IrUtil
             case CHAR:
                 return PrimitiveTypeCodec.CHAR;
 
+            case STRING:
+                return PrimitiveTypeCodec.STRING;
+
             default:
                 return PrimitiveTypeCodec.NONE;
         }

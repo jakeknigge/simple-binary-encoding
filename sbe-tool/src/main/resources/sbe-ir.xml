@@ -33,6 +33,7 @@
             <validValue name="UINT64">9</validValue>
             <validValue name="FLOAT">10</validValue>
             <validValue name="DOUBLE">11</validValue>
+            <validValue name="STRING">12</validValue>
         </enum>
         <enum name="SignalCodec" encodingType="uint8" description="Token signal type in IR">
             <validValue name="BEGIN_MESSAGE">1</validValue>
